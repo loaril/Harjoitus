@@ -1,0 +1,260 @@
+package harjoitus1;
+
+import java.util.Scanner;
+import java.util.Random;
+
+
+public class harjoitus {
+		  public static void main(String[ ] args) {
+			  
+			  //Making the grid for the game
+			  int[][] grid = { 
+					  {0, 0}, 
+					  {0, 0} 
+					  }; 
+			  
+			  int[][] aiGrid = { 
+					  {0, 0}, 
+					  {0, 0} 
+					  }; 
+			  
+			 int coordinate = 0;
+			 int force = 0;
+			 int i;
+			 int aiCoordinate = 0;  
+			 int aiForce = 0;
+			 
+			//Showing the beginning situation
+			 System.out.println("The current situation is:");
+			 System.out.println("Player" + "\t" + "Computer");
+			 System.out.println(grid[0][0] + "    " + grid[0][1] + "\t" + aiGrid[0][0] + "      " + aiGrid[0][1]);
+			 System.out.println(grid[1][0] + "    " + grid[1][1] + "\t" + aiGrid[1][0] + "      " + aiGrid[1][1]);
+			 System.out.println("");
+			 
+			 boolean loop = true;
+			 
+			 //Get round number
+			 
+				  
+			 // Game round loop starts here
+			 do {
+				 for (i = 1; i < 64; i++) {	 	
+					 
+			  Scanner in = new Scanner(System.in);  
+			  
+			  // Getting computer numbers
+			  Random ran = new Random();
+			  aiCoordinate = ran.nextInt(4) + 1;
+				 aiForce = ran.nextInt(10) + 1;
+			  /*
+			  //Computer ai for round 1
+			  if (i == 1 ){
+				 aiCoordinate = ran.nextInt(4) + 1;
+				 aiForce = ran.nextInt(4) + 1;
+				 
+			  // computer ai for round 2
+			  } else if (i == 2) {
+				  if (aiGrid[0][0] > 0) {
+					  aiCoordinate = ran.nextInt(3) + 2;
+					  
+				  } else if (aiGrid[0][1] > 0){
+					  aiCoordinate = ran.nextInt(3) + 1;
+					  if (aiCoordinate == 2){
+						  aiCoordinate = aiCoordinate +1;
+					  } 
+				  } else if (aiGrid[1][0] > 0){
+					  aiCoordinate = ran.nextInt(3) + 1;
+					  if (aiCoordinate == 3){
+						  aiCoordinate = aiCoordinate +1;
+					  }
+				  } else if (aiGrid[1][1] > 0){
+					  aiCoordinate = ran.nextInt(3) + 1;
+				  }
+				  if (aiCoordinate == coordinate){
+					  if (force < 4) {
+						  aiForce = force +1;
+					  }
+				  }
+					  
+					  if (aiGrid[0][0] + aiGrid[0][1] + aiGrid[1][0] + aiGrid[1][1] == 4 ) {
+						  aiForce = ran.nextInt(3) + 1;
+						  } else {aiForce = ran.nextInt(4) + 1; } 
+					 
+				 
+					  if (grid[0][0] < 4 && grid[0][0] > 0) {
+						  aiCoordinate = 1;
+						  aiForce = 4;
+						  
+					  } else if (grid[0][0] > 3) {
+						  aiCoordinate = ran.nextInt(4) + 2;
+					  
+			
+				  }
+				
+			  }
+			  
+*/
+			  
+			// Asking for player numbers
+			  do {
+				  
+			  System.out.println("Enter the coordinate of your strike 1-4");
+			  coordinate = in.nextInt();
+			  if (coordinate < 1 || coordinate > 4) {
+				  System.out.println("Invalid coordinate");
+			  }
+			  } while (coordinate < 1 || coordinate > 4);
+			  
+			  
+			  do {
+				  System.out.println("Enter the force of your strike 1-9");
+				  
+				  force = in.nextInt();
+				  
+				  if (coordinate == aiCoordinate && force == aiForce) {
+					 
+					  
+				  } else if (coordinate == aiCoordinate && force > aiForce) {
+					  
+					  
+					  if (coordinate == 1) {
+						  grid[0][0] = force;
+						  
+						  } else if (coordinate == 2) {
+							  grid[0][1] = force;
+							  
+							  }  else if (coordinate == 3) {
+								  grid[1][0] = force;
+								  
+								  }  else if (coordinate == 4) {
+									  grid[1][1] = force;
+									  }
+					  
+				  } else if (coordinate == aiCoordinate && force < aiForce) {
+					 
+					  
+				  }	else if (coordinate == 1) {
+					  grid[0][0] = force;
+					  
+					  } else if (coordinate == 2) {
+						  grid[0][1] = force;
+						  
+						  }  else if (coordinate == 3) {
+							  grid[1][0] = force;
+							  
+							  }  else if (coordinate == 4) {
+								  grid[1][1] = force;
+								  }
+				  if (force < 1 || force > 9) {
+					  System.out.println("Invalid strike force");
+					  }
+				  } while (force < 1 || force > 9);
+			  
+			  // Computer numbers
+			  System.out.println(aiCoordinate);
+			  System.out.println(aiForce);
+			
+			  if (coordinate == aiCoordinate && force == aiForce) {
+				  System.out.println("Both players stroke coordinate " + coordinate + " with the same strike force " + force + ", tie");
+				  
+			  } else if (coordinate == aiCoordinate && force > aiForce) {
+				  System.out.println("Player dominates the computer");
+				  
+			  } else if (coordinate == aiCoordinate && force < aiForce) {
+				  System.out.println("The computer dominates player");
+				  
+				  if (aiCoordinate == 1) {
+					  aiGrid[0][0] = aiForce;
+					  
+					  } else if (aiCoordinate == 2) {
+						  aiGrid[0][1] = aiForce;
+						  
+						  }  else if (aiCoordinate == 3) {
+							  aiGrid[1][0] = aiForce;
+							  
+							  }  else if (aiCoordinate == 4) {
+								  aiGrid[1][1] = aiForce;
+							  }
+				  
+			  } else if (aiCoordinate == 1) {
+				  aiGrid[0][0] = aiForce;
+				  
+				  } else if (aiCoordinate == 2) {
+					  aiGrid[0][1] = aiForce;
+					  
+					  }  else if (aiCoordinate == 3) {
+						  aiGrid[1][0] = aiForce;
+						  
+						  }  else if (aiCoordinate == 4) {
+							  aiGrid[1][1] = aiForce;
+							  }
+			  
+			  
+			  				//Removing smaller numbers from last round
+			 			  if (grid[0][0] > aiGrid[0][0]) {
+			 				  aiGrid[0][0] = 0;
+			 			  } else {grid[0][0] = 0;
+			 			  }
+			 			  
+			 			  if (grid[0][1] > aiGrid[0][1]) {
+			 				  aiGrid[0][1] = 0;
+			 			  } else {grid[0][1] = 0;
+			 			  }
+			 			  
+			 			 if (grid[1][0] > aiGrid[1][0]) {
+			 				  aiGrid[1][0] = 0;
+			 			  } else {grid[1][0] = 0;
+			 			  }
+			 			 
+			 			if (grid[1][1] > aiGrid[1][1]) {
+			 				  aiGrid[1][1] = 0;
+			 			  } else {grid[1][1] = 0;
+			 			  }
+			 			
+			 			if (grid[0][0] + grid[0][1] + grid[1][0] + grid[1][1] > 10 ||
+			 				grid[0][0] > 0 && grid[0][1] > 0 && grid[1][0] > 0 ||
+			 				grid[0][0] > 0 && grid[0][1] > 0 && grid[1][1] > 0 ||
+			 				grid[0][0] > 0 && grid[1][0] > 0 && grid[1][1] > 0 ||
+			 				grid[1][0] > 0 && grid[0][1] > 0 && grid[1][1] > 0 ||
+			 				aiGrid[0][0] > 0 && aiGrid[0][1] > 0 && aiGrid[1][0] > 0 ||
+			 				aiGrid[0][0] > 0 && aiGrid[0][1] > 0 && aiGrid[1][1] > 0 ||
+			 				aiGrid[0][0] > 0 && aiGrid[1][0] > 0 && aiGrid[1][1] > 0 ||
+			 				aiGrid[1][0] > 0 && aiGrid[0][1] > 0 && aiGrid[1][1] > 0) {
+			 			loop = false;
+			 			i = 64;
+			 			
+			 			}
+			 			//Showing the current situation1
+			  System.out.println("The current situation is:");
+				 System.out.println("Player" + "\t" + "Computer");
+				 System.out.println(grid[0][0] + "    " + grid[0][1] + "\t" + aiGrid[0][0] + "      " + aiGrid[0][1]);
+				 System.out.println(grid[1][0] + "    " + grid[1][1] + "\t" + aiGrid[1][0] + "      " + aiGrid[1][1]);
+				 System.out.println("");
+				 		
+				 
+				 }
+				 
+				 		// The game ends if the sum of the players' grid is over 10 or player or computer controls 3 coordinates
+			   		  } while (loop == true);
+			   				  
+			  
+			  			if (grid[0][0] + grid[0][1] + grid[1][0] + grid[1][1] > 10) {
+			  				System.out.println("You ran out of force, you lost");
+			  			} else 
+			  			if (grid[0][0] > 0 && grid[0][1] > 0 && grid[1][0] > 0 ||
+			 				grid[0][0] > 0 && grid[0][1] > 0 && grid[1][1] > 0 ||
+			 				grid[0][0] > 0 && grid[1][0] > 0 && grid[1][1] > 0 ||
+			 				grid[1][0] > 0 && grid[0][1] > 0 && grid[1][1] > 0 ) {
+			  				System.out.println("You won by controlling 3 coordinates");
+			  			}
+			  			if (aiGrid[0][0] > 0 && aiGrid[0][1] > 0 && aiGrid[1][0] > 0 ||
+			 				aiGrid[0][0] > 0 && aiGrid[0][1] > 0 && aiGrid[1][1] > 0 ||
+			 				aiGrid[0][0] > 0 && aiGrid[1][0] > 0 && aiGrid[1][1] > 0 ||
+			 				aiGrid[1][0] > 0 && aiGrid[0][1] > 0 && aiGrid[1][1] > 0) {
+			  				System.out.println("Computer won by controlling 3 coordinates");
+			  			}
+			  			
+			   			System.out.println("The end");
+		  }
+}
+		
